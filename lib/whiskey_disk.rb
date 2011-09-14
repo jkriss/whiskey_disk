@@ -73,6 +73,10 @@ class WhiskeyDisk
       end
     end
     
+    def rake_command
+      self[:rake_command] || 'rake'
+    end
+    
     def parent_path(path)
       File.split(path).first
     end
@@ -198,7 +202,7 @@ class WhiskeyDisk
     end
     
     def if_task_defined(task, cmd)
-      %Q(rakep=`#{env_vars} rake -P` && if [[ `echo "${rakep}" | grep #{task}` != "" ]]; then #{cmd}; fi )
+      %Q(rakep=`#{env_vars} #{rake_command} -P` && if [[ `echo "${rakep}" | grep #{task}` != "" ]]; then #{cmd}; fi )
     end
     
     def safe_branch_checkout(path, my_branch)

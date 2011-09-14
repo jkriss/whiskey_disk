@@ -202,6 +202,7 @@ class WhiskeyDisk
     end
     
     def if_task_defined(task, cmd)
+      puts "Using rake command #{rake_command}"
       %Q(rakep=`#{env_vars} #{rake_command} -P` && if [[ `echo "${rakep}" | grep #{task}` != "" ]]; then #{cmd}; fi )
     end
     

@@ -227,7 +227,7 @@ class WhiskeyDisk
       enqueue "echo Running rake #{task_name}..."
       enqueue "cd #{path}"
       enqueue(if_file_present("#{self[:deploy_to]}/Rakefile", 
-        if_task_defined(task_name, "#{env_vars} rake #{'--trace' if Config.debug?} #{task_name} to=#{self[:environment]}")))
+        if_task_defined(task_name, "#{env_vars} #{rake_command} #{'--trace' if Config.debug?} #{task_name} to=#{self[:environment]}")))
     end
     
     def build_path(path)
